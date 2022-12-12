@@ -91,7 +91,7 @@ export default function Home() {
 
     .main {
       padding-left: 47px;
-      padding-right: 47px;
+      padding-right: 77px;
       padding-top: 47px;
     }
 
