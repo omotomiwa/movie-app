@@ -16,7 +16,7 @@ export default function Home() {
       height: 140px;
       background: #292929;
       padding-left: 50px;
-      padding-top: 45px;
+      padding-top: 42px;
     }
 
     h1 {
@@ -41,7 +41,7 @@ export default function Home() {
       width: 180px;
       height: 60px;
       text-align: center;
-      padding-top: 12px;
+      padding-top: 10px;
     }
     /* Media Query for Mobile Devices */
     @media (max-width: 480px) {
