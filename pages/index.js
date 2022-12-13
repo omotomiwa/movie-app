@@ -38,6 +38,7 @@ export default function Home() {
     .logo-container {
       background: transparent;
       border: 1px solid #ffffff;
+      box-sizing: border-box;
       width: 180px;
       height: 60px;
       text-align: center;
