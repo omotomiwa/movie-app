@@ -47,6 +47,7 @@ export default function Home() {
     @media (max-width: 480px) {
       h2 {
         text-align: center;
+        font-size: 40px;
       }
 
       .logo-container {
