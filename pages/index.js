@@ -284,7 +284,7 @@ export default function Home() {
         <div className="grid-container">
           <div className="row gx-5 gy-5">
             {_.map(filteredUsers, (user) => (
-              <div className="movies col-xs-12 col-lg-2 col-md-6" key={user.id}>
+              <div className="movies col-xs-12 col-lg-3 col-md-6" key={user.id}>
                 <p>{user.name}</p>
 
                 <img
