@@ -221,6 +221,7 @@ export default function Home() {
 
   const [searchValue, setSearchValue] = React.useState("");
   const [filteredUsers, setFilteredUsers] = React.useState(products);
+  const ref = React.useRef(null);
 
   const handleSearchFilter = (e) => {
     setSearchValue(e.target.value);
@@ -266,6 +267,7 @@ export default function Home() {
       <div className="main">
         <div className="search-wrapper">
           <p className="search">Search</p>
+
           <input
             type="search"
             className="form-control h-75"
@@ -274,12 +276,15 @@ export default function Home() {
             aria-describedby="basic-addon1"
             value={searchValue}
             onChange={handleSearchFilter}
+            ref={(input) => {
+              input && input.focus();
+            }}
           />
         </div>
         <div className="grid-container">
           <div className="row gx-5 gy-5">
             {_.map(filteredUsers, (user) => (
-              <div className="movies col-xs-12 col-lg-3 col-md-6" key={user.id}>
+              <div className="movies col-xs-12 col-lg-2 col-md-6" key={user.id}>
                 <p>{user.name}</p>
 
                 <img
