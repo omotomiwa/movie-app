@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
-
+import _ from "lodash";
 import "bootstrap/dist/css/bootstrap.css";
 
 import React from "react";
@@ -25,9 +25,9 @@ export default function Home() {
     }
     h2 {
       color: #ffffff;
-      font-size: 50px;
+      font-size: 75px;
       font-weight: 700;
-      line-height: 73.74px;
+      line-height: 80px;
     }
     p {
       font-weight: 400;
@@ -48,6 +48,7 @@ export default function Home() {
       h2 {
         text-align: center;
       }
+
       .logo-container {
         background: transparent;
         border: 1px solid #ffffff;
@@ -80,19 +81,19 @@ export default function Home() {
     }
     .image-section {
       width: 100%;
-      height: 450px;
+      height: 550px;
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center center;
       background-image: url("https://res.cloudinary.com/dl7eouhxf/image/upload/v1670762748/Rectangle_5.svg");
       padding-left: 47px;
-      padding-top: 80px;
+      padding-top: 109px;
     }
 
     .main {
       padding-left: 47px;
       padding-right: 77px;
-      padding-top: 47px;
+      padding-top: 77px;
     }
 
     .search {
@@ -201,6 +202,7 @@ export default function Home() {
         "https://res.cloudinary.com/dl7eouhxf/image/upload/v1670839477/movie-poster/free_guy.jpg",
     },
   ];
+  items: [];
 
   const [post, setPost] = React.useState([]);
 
@@ -217,6 +219,36 @@ export default function Home() {
     listing();
   }, []);
 
+  const [searchValue, setSearchValue] = React.useState("");
+  const [filteredUsers, setFilteredUsers] = React.useState(products);
+
+  const handleSearchFilter = (e) => {
+    setSearchValue(e.target.value);
+  };
+  React.useEffect(() => {
+    // const timeout = setTimeout(() => {
+    //   const filter = products.filter((user) => {
+    //     return user.name.match(
+    //       // searchValue
+
+    //       _.lowerCase(JSON.stringify(_.values(user))),
+    //       _.lowerCase(searchValue)
+    //     );
+    //   });
+    //   setFilteredUsers(filter);
+    // }, 500);
+    // return () => clearTimeout(timeout);
+    const timeout = setTimeout(() => {
+      const filter = _.filter(products, (user) => {
+        return _.includes(
+          _.lowerCase(JSON.stringify(_.values(user))),
+          _.lowerCase(searchValue)
+        );
+      });
+      setFilteredUsers(filter);
+    }, 500);
+    return () => clearTimeout(timeout);
+  }, [searchValue]);
   return (
     <Wrapper>
       <div className="contain">
@@ -235,25 +267,24 @@ export default function Home() {
         <div className="search-wrapper">
           <p className="search">Search</p>
           <input
-            type="text"
+            type="search"
             className="form-control h-75"
             placeholder="Search for movies..."
             aria-label="Username"
             aria-describedby="basic-addon1"
+            value={searchValue}
+            onChange={handleSearchFilter}
           />
         </div>
         <div className="grid-container">
           <div className="row gx-5 gy-5">
-            {products.map((item) => (
-              <div
-                className="movies col-xs-12 col-lg-3 col-md-6"
-                key={item.name}
-              >
-                <p>{item.name}</p>
+            {_.map(filteredUsers, (user) => (
+              <div className="movies col-xs-12 col-lg-3 col-md-6" key={user.id}>
+                <p>{user.name}</p>
 
                 <img
                   className=" images"
-                  src={item.image}
+                  src={user.image}
                   alt="https://res.cloudinary.com/dl7eouhxf/image/upload/v1670832088/image-grid.svg"
                 />
               </div>
